@@ -10,7 +10,7 @@ class TestFakeFile(unittest.TestCase):
 
     def test_write(self):
         with mock.patch('__builtin__.open', self.fakefile.open):
-            f = open("/impossible/location")
+            f = open("/impossible/location", "w")
             f.write("content")
             f.close()
 
@@ -19,7 +19,7 @@ class TestFakeFile(unittest.TestCase):
 
     def test_write_context(self):
         with mock.patch('__builtin__.open', self.fakefile.open):
-            with open("/impossible/location") as f:
+            with open("/impossible/location", "w") as f:
                 f.write("content2")
 
         test_reference_to_f = self.fakefile.files["/impossible/location"]
@@ -27,7 +27,7 @@ class TestFakeFile(unittest.TestCase):
 
     def test_write_multiline(self):
         with mock.patch('__builtin__.open', self.fakefile.open):
-            with open("/impossible/location") as f:
+            with open("/impossible/location", "w") as f:
                 print >>f, "line 1"
                 print >>f, "line 2"
 
