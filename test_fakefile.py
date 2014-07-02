@@ -34,3 +34,14 @@ class TestFakeFile(unittest.TestCase):
         test_reference_to_f = self.fakefile.files["/impossible/location"]
         actual_lines = test_reference_to_f.file_contents.splitlines()
         self.assertEquals(["line 1", "line 2"], actual_lines)
+
+    def test_read(self):
+        self.fakefile.set_contents("/dev/null", "look ma, content!")
+
+        with mock.patch('__builtin__.open', self.fakefile.open):
+            with open("/dev/null", "r") as f:
+                self.assertEqual(f.read(), "look ma, content!")
+
+            # Should still be re-openable and re-readable
+            with open("/dev/null", "r") as f:
+                self.assertEqual(f.read(), "look ma, content!")
