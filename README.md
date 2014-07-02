@@ -1,4 +1,4 @@
-fakefile
+fakefile [![Build Status](https://travis-ci.org/lutzky/translationese.png?branch=master)](https://travis-ci.org/lutzky/translationese) 
 ========
 
 Sometimes your code needs to write some files, and you want to test that it does this correctly. This library provides a relatively simple way to do it.
